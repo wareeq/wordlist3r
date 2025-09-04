@@ -41,7 +41,7 @@ python wordlist3r/main.py --help
 
 ### Quick Install (One-liner)
 ```bash
-git clone https://github.com/wareeqshile/wordlist3r.git && cd wordlist3r && pip install -e . --break-system-packages
+git clone https://github.com/wareeq/wordlist3r.git && cd wordlist3r && pip install -e . --break-system-packages
 ```
 
 ## 🎯 Quick Start
