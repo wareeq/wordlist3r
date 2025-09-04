@@ -33,7 +33,7 @@ pip install wordlist3r
 
 ### Install from Source
 ```bash
-git clone https://github.com/yourusername/wordlist3r.git
+git clone https://github.com/wareeq/wordlist3r.git
 cd wordlist3r
 pip install -r requirements.txt
 ```
