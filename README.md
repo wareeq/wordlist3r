@@ -41,7 +41,7 @@ python wordlist3r/main.py --help
 
 ### Quick Install (One-liner)
 ```bash
-git clone https://github.com/wareeqshile/wordlist3r.git && cd wordlist3r && pip install -e .
+git clone https://github.com/wareeqshile/wordlist3r.git && cd wordlist3r && pip install -e . --break-system-packages
 ```
 
 ## 🎯 Quick Start
@@ -176,7 +176,7 @@ We welcome contributions! Here's how you can help:
 
 ### Development Setup
 ```bash
-git clone https://github.com/wareeqshile/wordlist3r.git
+git clone https://github.com/wareeq/wordlist3r.git
 cd wordlist3r
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
