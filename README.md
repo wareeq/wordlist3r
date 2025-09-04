@@ -2,13 +2,13 @@
 
 [![Python Version](https://img.shields.io/badge/python-3.7+-blue.svg)](https://python.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub release](https://img.shields.io/github/release/yourusername/wordlist3r.svg)](https://github.com/yourusername/wordlist3r/releases/)
+[![GitHub release](https://img.shields.io/github/release/wareeqshile/wordlist3r.svg)](https://github.com/wareeqshile/wordlist3r/releases/)
+[![Website](https://img.shields.io/badge/website-wareeqshile.com-blue)](https://www.wareeqshile.com)
+[![Twitter Follow](https://img.shields.io/twitter/follow/wareeq_shile?style=social)](https://twitter.com/wareeq_shile)
 
 **Fast and intelligent wordlist generator for directory fuzzing.**
 
 wordlist3r is a powerful Python tool that extracts custom wordlists from live web applications by analyzing page content, titles, metadata, and domain structures. Perfect for bug bounty hunters and penetration testers who need targeted wordlists for directory brute-forcing.
-
-![wordlist3r demo](https://user-images.githubusercontent.com/yourid/demo.gif)
 
 ## 🚀 Features
 
@@ -26,26 +26,29 @@ wordlist3r is a powerful Python tool that extracts custom wordlists from live we
 - Python 3.7+
 - pip
 
-### Install from PyPI (Coming Soon)
-```bash
-pip install wordlist3r
-```
-
 ### Install from Source
 ```bash
-git clone https://github.com/wareeq/wordlist3r.git
+git clone https://github.com/wareeqshile/wordlist3r.git
 cd wordlist3r
 pip install -r requirements.txt
+
+# Install as package (recommended)
+pip install -e .
+
+# Or run directly without installation
+python wordlist3r/main.py --help
 ```
 
-### Dependencies
+### Quick Install (One-liner)
 ```bash
-pip install aiohttp beautifulsoup4 tldextract
+git clone https://github.com/wareeqshile/wordlist3r.git && cd wordlist3r && pip install -e .
 ```
 
 ## 🎯 Quick Start
 
 ```bash
+# After installation, use wordlist3r command:
+
 # Extract from URLs in a file
 wordlist3r -f alive_urls.txt -o custom_wordlist.txt
 
@@ -60,6 +63,12 @@ wordlist3r https://site1.com https://site2.com -o wordlist.txt
 
 # Custom filtering options
 wordlist3r -f urls.txt --min-length 4 --min-freq 3 --sort -o filtered.txt
+```
+
+### Alternative: Run without installation
+```bash
+# If you prefer not to install as package:
+python wordlist3r/main.py -f alive_urls.txt -o custom_wordlist.txt
 ```
 
 ## 📋 Usage
@@ -167,12 +176,34 @@ We welcome contributions! Here's how you can help:
 
 ### Development Setup
 ```bash
-git clone https://github.com/yourusername/wordlist3r.git
+git clone https://github.com/wareeqshile/wordlist3r.git
 cd wordlist3r
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements-dev.txt
 ```
+
+### Connect with the Author
+- 🌐 **Website**: [wareeqshile.com](https://www.wareeqshile.com)
+- 🐦 **Twitter**: [@wareeq_shile](https://twitter.com/wareeq_shile) 
+- 📧 **Email**: wareeqshile@protonmail.com
+
+Feel free to reach out for questions, suggestions, or collaboration!
+
+## 🐛 Bug Reports & Issues
+
+Found a bug or have a feature request? Please open an issue with:
+
+- Your Python version (`python --version`)
+- Operating system 
+- Complete error message/traceback
+- Steps to reproduce
+- Example URLs (if safe to share)
+
+**Installation Issues?**
+- Make sure you have Python 3.7+
+- Try `pip install -e . --user` if you get permission errors
+- Use `python wordlist3r/main.py` if package installation fails
 
 ## 📝 Changelog
 
@@ -191,4 +222,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Happy Hunting! 🎯**
 
-*Made with ❤️ by Wareeq Shile*
+## 👨‍💻 Author
+
+**Wareeq Shile**  
+🌐 Website: [wareeqshile.com](https://www.wareeqshile.com)  
+🐦 Twitter: [@wareeq_shile](https://twitter.com/wareeq_shile)  
+📧 Email: wareeqshile@protonmail.com
+
+*Made with ❤️ for the cybersecurity community*
