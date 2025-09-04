@@ -1,0 +1,258 @@
+# wordlist3r 🎯
+
+[![Python Version](https://img.shields.io/badge/python-3.7+-blue.svg)](https://python.org)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub release](https://img.shields.io/github/release/yourusername/wordlist3r.svg)](https://github.com/yourusername/wordlist3r/releases/)
+
+**Fast and intelligent wordlist generator for directory fuzzing.**
+
+wordlist3r is a powerful Python tool that extracts custom wordlists from live web applications by analyzing page content, titles, metadata, and domain structures. Perfect for bug bounty hunters and penetration testers who need targeted wordlists for directory brute-forcing.
+
+![wordlist3r demo](https://user-images.githubusercontent.com/yourid/demo.gif)
+
+## 🚀 Features
+
+- **Multi-source extraction**: Domains, subdomains, page titles, content, metadata
+- **Smart filtering**: Automatic IP address filtering, common word removal
+- **Concurrent processing**: Fast async HTTP requests with rate limiting  
+- **SSL-friendly**: Handles self-signed certificates and SSL errors
+- **Flexible input**: Supports wildcards, multiple files, direct URLs
+- **Pentesting optimized**: Built for reconnaissance workflows
+- **Clean output**: Removes noise and focuses on meaningful directory names
+
+## 📦 Installation
+
+### Prerequisites
+- Python 3.7+
+- pip
+
+### Install from PyPI (Coming Soon)
+```bash
+pip install wordlist3r
+```
+
+### Install from Source
+```bash
+git clone https://github.com/yourusername/wordlist3r.git
+cd wordlist3r
+pip install -r requirements.txt
+```
+
+### Dependencies
+```bash
+pip install aiohttp beautifulsoup4 tldextract
+```
+
+## 🎯 Quick Start
+
+```bash
+# Extract from URLs in a file
+wordlist3r -f alive_urls.txt -o custom_wordlist.txt
+
+# Process multiple reconnaissance files  
+wordlist3r -f ~/recon/*/alive.txt -o combined_wordlist.txt
+
+# Single URL with verbose output
+wordlist3r -u https://example.com -o wordlist.txt -v
+
+# Multiple URLs directly
+wordlist3r https://site1.com https://site2.com -o wordlist.txt
+
+# Custom filtering options
+wordlist3r -f urls.txt --min-length 4 --min-freq 3 --sort -o filtered.txt
+```
+
+## 📋 Usage
+
+```
+wordlist3r [-h] [-f FILE] [-u URL] [--files FILES [FILES ...]] 
+           [-o OUTPUT] [--sort] [--min-length N] [--max-length N] 
+           [--min-freq N] [--no-ip-filter] [-v] [urls ...]
+
+Extract custom wordlists from URLs for directory fuzzing
+
+positional arguments:
+  urls                  URLs to process directly
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -f FILE, --file FILE  File(s) containing URLs (supports wildcards)
+  -u URL, --url URL     Single URL to add (can be used multiple times)
+  --files FILES [FILES ...]
+                        Multiple specific files containing URLs
+  -o OUTPUT, --output OUTPUT
+                        Output wordlist file
+  --sort                Sort output wordlist
+  --min-length N        Minimum word length (default: 3)
+  --max-length N        Maximum word length (default: 50)
+  --min-freq N          Minimum word frequency (default: 2)
+  --no-ip-filter        Disable automatic IP address filtering
+  -v, --verbose         Enable verbose output
+```
+
+## 💡 Examples
+
+### Basic Usage
+```bash
+# Process a single file
+wordlist3r -f subdomains.txt -o wordlist.txt
+
+# Multiple files with wildcards (great for recon!)
+wordlist3r -f ~/recon/*/alive.txt -o mega_wordlist.txt
+
+# Add individual URLs
+wordlist3r -u https://app.target.com -u https://admin.target.com -o wordlist.txt
+```
+
+### Advanced Filtering
+```bash
+# Longer words only, higher frequency threshold
+wordlist3r -f urls.txt --min-length 5 --min-freq 3 -o quality_words.txt
+
+# Keep IP addresses (useful for certain scenarios)
+wordlist3r -f urls.txt --no-ip-filter -o wordlist_with_ips.txt
+
+# Sorted output for easy analysis
+wordlist3r -f urls.txt --sort -o sorted_wordlist.txt
+```
+
+### Integration with Other Tools
+```bash
+# Use with gobuster
+wordlist3r -f alive.txt -o custom.txt
+gobuster dir -u https://target.com -w custom.txt
+
+# Use with ffuf  
+wordlist3r -f ~/recon/target.com/alive.txt -o target_words.txt
+ffuf -u https://target.com/FUZZ -w target_words.txt
+
+# Use with dirsearch
+wordlist3r -f alive.txt -o custom.txt
+dirsearch -u https://target.com -w custom.txt
+```
+
+## 🔍 What It Extracts
+
+### Domain & Subdomain Parts
+- `admin.example.com` → `admin`, `example`
+- `api-v2.staging.corp.com` → `api`, `v2`, `staging`, `corp`
+
+### Page Titles
+- "Admin Dashboard - Company Portal" → `admin`, `dashboard`, `company`, `portal`
+
+### Meta Tags & Attributes
+- Keywords, descriptions, alt text, title attributes
+- OpenGraph and Twitter card metadata
+
+### Content Analysis  
+- Frequently occurring words (configurable threshold)
+- Link text and URL paths
+- Form field names and IDs
+
+### Smart Filtering
+- ✅ Removes IP addresses and octets
+- ✅ Filters common English words
+- ✅ Eliminates HTML/web noise terms
+- ✅ Focuses on directory-relevant terms
+
+## 🛠️ Integration Workflow
+
+```bash
+# 1. Subdomain discovery
+subfinder -d target.com | tee subdomains.txt
+
+# 2. Probe for live hosts  
+httprobe < subdomains.txt | tee alive.txt
+
+# 3. Generate custom wordlist
+wordlist3r -f alive.txt -o target_wordlist.txt --sort
+
+# 4. Directory bruteforce
+gobuster dir -u https://target.com -w target_wordlist.txt -t 50
+```
+
+## 🎛️ Configuration
+
+### Performance Tuning
+- Concurrent connections: 100 total, 20 per host
+- Request timeout: 15 seconds  
+- SSL verification: Disabled (pentesting mode)
+- Batch processing: 50 URLs per batch
+
+### Word Filtering
+- Default min length: 3 characters
+- Default max length: 50 characters  
+- Default min frequency: 2 occurrences
+- IP filtering: Enabled by default
+
+## 🚨 Responsible Usage
+
+wordlist3r is designed for authorized security testing only:
+
+- ✅ **DO**: Use on systems you own or have explicit permission to test
+- ✅ **DO**: Respect rate limits and target server resources
+- ✅ **DO**: Follow responsible disclosure for any findings
+- ❌ **DON'T**: Use against systems without permission
+- ❌ **DON'T**: Overwhelm targets with excessive requests
+
+## 🤝 Contributing
+
+We welcome contributions! Here's how you can help:
+
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
+3. **Commit** your changes (`git commit -m 'Add amazing feature'`)
+4. **Push** to the branch (`git push origin feature/amazing-feature`)
+5. **Open** a Pull Request
+
+### Development Setup
+```bash
+git clone https://github.com/yourusername/wordlist3r.git
+cd wordlist3r
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements-dev.txt
+```
+
+## 🐛 Bug Reports
+
+Found a bug? Please open an issue with:
+- Your Python version
+- Operating system
+- Complete error message
+- Steps to reproduce
+- Example URLs (if safe to share)
+
+## 📝 Changelog
+
+### v1.0.0 (2024)
+- Initial release
+- Multi-source word extraction
+- Async HTTP processing
+- Smart filtering system
+- Wildcard file support
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- Thanks to the bug bounty and pentesting community for inspiration
+- Built with Python's fantastic async ecosystem
+- Inspired by tools like gobuster, dirb, and ffuf
+
+## 🔗 Related Tools
+
+- [gobuster](https://github.com/OJ/gobuster) - Fast directory bruteforcer
+- [ffuf](https://github.com/ffuf/ffuf) - Fast web fuzzer  
+- [dirsearch](https://github.com/maurosoria/dirsearch) - Web path scanner
+- [subfinder](https://github.com/projectdiscovery/subfinder) - Subdomain discovery
+- [httprobe](https://github.com/tomnomnom/httprobe) - HTTP probe utility
+
+---
+
+**Happy Hunting! 🎯**
+
+*Made with ❤️ by Wareeq Shile for the cybersecurity community*
+# wordlist3r
