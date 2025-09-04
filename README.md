@@ -116,21 +116,6 @@ wordlist3r -f urls.txt --no-ip-filter -o wordlist_with_ips.txt
 wordlist3r -f urls.txt --sort -o sorted_wordlist.txt
 ```
 
-### Integration with Other Tools
-```bash
-# Use with gobuster
-wordlist3r -f alive.txt -o custom.txt
-gobuster dir -u https://target.com -w custom.txt
-
-# Use with ffuf  
-wordlist3r -f ~/recon/target.com/alive.txt -o target_words.txt
-ffuf -u https://target.com/FUZZ -w target_words.txt
-
-# Use with dirsearch
-wordlist3r -f alive.txt -o custom.txt
-dirsearch -u https://target.com -w custom.txt
-```
-
 ## 🔍 What It Extracts
 
 ### Domain & Subdomain Parts
@@ -155,21 +140,6 @@ dirsearch -u https://target.com -w custom.txt
 - ✅ Eliminates HTML/web noise terms
 - ✅ Focuses on directory-relevant terms
 
-## 🛠️ Integration Workflow
-
-```bash
-# 1. Subdomain discovery
-subfinder -d target.com | tee subdomains.txt
-
-# 2. Probe for live hosts  
-httprobe < subdomains.txt | tee alive.txt
-
-# 3. Generate custom wordlist
-wordlist3r -f alive.txt -o target_wordlist.txt --sort
-
-# 4. Directory bruteforce
-gobuster dir -u https://target.com -w target_wordlist.txt -t 50
-```
 
 ## 🎛️ Configuration
 
@@ -184,16 +154,6 @@ gobuster dir -u https://target.com -w target_wordlist.txt -t 50
 - Default max length: 50 characters  
 - Default min frequency: 2 occurrences
 - IP filtering: Enabled by default
-
-## 🚨 Responsible Usage
-
-wordlist3r is designed for authorized security testing only:
-
-- ✅ **DO**: Use on systems you own or have explicit permission to test
-- ✅ **DO**: Respect rate limits and target server resources
-- ✅ **DO**: Follow responsible disclosure for any findings
-- ❌ **DON'T**: Use against systems without permission
-- ❌ **DON'T**: Overwhelm targets with excessive requests
 
 ## 🤝 Contributing
 
@@ -214,15 +174,6 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements-dev.txt
 ```
 
-## 🐛 Bug Reports
-
-Found a bug? Please open an issue with:
-- Your Python version
-- Operating system
-- Complete error message
-- Steps to reproduce
-- Example URLs (if safe to share)
-
 ## 📝 Changelog
 
 ### v1.0.0 (2024)
@@ -236,23 +187,8 @@ Found a bug? Please open an issue with:
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
-
-- Thanks to the bug bounty and pentesting community for inspiration
-- Built with Python's fantastic async ecosystem
-- Inspired by tools like gobuster, dirb, and ffuf
-
-## 🔗 Related Tools
-
-- [gobuster](https://github.com/OJ/gobuster) - Fast directory bruteforcer
-- [ffuf](https://github.com/ffuf/ffuf) - Fast web fuzzer  
-- [dirsearch](https://github.com/maurosoria/dirsearch) - Web path scanner
-- [subfinder](https://github.com/projectdiscovery/subfinder) - Subdomain discovery
-- [httprobe](https://github.com/tomnomnom/httprobe) - HTTP probe utility
-
 ---
 
 **Happy Hunting! 🎯**
 
-*Made with ❤️ by Wareeq Shile for the cybersecurity community*
-# wordlist3r
+*Made with ❤️ by Wareeq Shile*
