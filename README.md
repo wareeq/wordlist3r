@@ -186,7 +186,6 @@ pip install -r requirements-dev.txt
 ### Connect with the Author
 - 🌐 **Website**: [wareeqshile.com](https://www.wareeqshile.com)
 - 🐦 **Twitter**: [@wareeq_shile](https://twitter.com/wareeq_shile) 
-- 📧 **Email**: wareeqshile@protonmail.com
 
 Feel free to reach out for questions, suggestions, or collaboration!
 
@@ -221,12 +220,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 **Happy Hunting! 🎯**
-
-## 👨‍💻 Author
-
-**Wareeq Shile**  
-🌐 Website: [wareeqshile.com](https://www.wareeqshile.com)  
-🐦 Twitter: [@wareeq_shile](https://twitter.com/wareeq_shile)  
-📧 Email: wareeqshile@protonmail.com
 
 *Made with ❤️ for the cybersecurity community*
